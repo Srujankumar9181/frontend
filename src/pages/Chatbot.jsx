@@ -5,7 +5,7 @@ import chaticon from "../assets/Icon.svg";
 import { addEndUser, sendMessage, fetchusers } from "../services";
 import { BotCOntext } from "../context/BotContext";
 import johndoe from "../assets/johndoe.svg";
-import { toast } from "react-toastify";
+
 
 function Chatbot() {
   const { botconfig } = useContext(BotCOntext);
@@ -73,10 +73,10 @@ function Chatbot() {
 
   const handlesendMessage = async () => {
     if (!currentUser) {
-      toast.error("please register yourself first");
+ 
       return;
     } else if (newmessage.message.trim().length === 0) {
-      toast.error("please enter the message");
+    
       return;
     }
     const response = await sendMessage({ id, message: newmessage });
@@ -97,7 +97,7 @@ function Chatbot() {
       formdata.email.trim().length === 0 ||
       formdata.phone.trim().length === 0
     ) {
-      toast.error("Please fill all the fields");
+     
       return;
     }
 
@@ -116,7 +116,7 @@ function Chatbot() {
     try {
       const response = await addEndUser(formdata);
       console.log(response);
-      toast.success("Registered succesfully");
+     
       setCurrentuser(response.data);
       localStorage.setItem("currentuser", JSON.stringify(response.data));
       console.log(formdata);

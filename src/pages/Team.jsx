@@ -8,7 +8,7 @@ import {
 } from "../services/index.js";
 import johndoe from "../assets/johndoe.svg";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
-import { toast } from "react-toastify";
+
 
 function Team() {
   const currentadmin = JSON.parse(localStorage.getItem("currentadmin")) || {};
@@ -35,7 +35,7 @@ function Team() {
   const deleteTeamMember = async (id) => {
     const response = await deleteMember(id);
     console.log(response);
-    toast.success(response.message);
+   
     fetchmembers();
     return;
   };
@@ -68,14 +68,14 @@ function Team() {
       formData.email.trim().length === 0 ||
       formData.phone.trim().length === 0
     ) {
-      toast.error("Please fill all the fields");
+     
       return;
     } else if (!isEdit) {
       try {
         const response = await AddteamMember(formData);
         console.log(response);
         setshowmodal(false);
-        toast.success(response.message);
+     
         // window.location.reload()
         setteamMembers((prev) => [...prev, response.member]);
         setFormdata({
@@ -95,7 +95,7 @@ function Team() {
     try {
       const response = await editMember(editId, formData);
       console.log(response);
-      toast.success(response.message);
+     
       setteamMembers(response.data);
       setFormdata({
         fullname: "",
@@ -186,7 +186,7 @@ function Team() {
         className={style.add}
         onClick={() => {
           if (currentadmin.role != "admin") {
-            toast.error("Team member cannot add another team member");
+            
             return;
           }
           setshowmodal(true);
